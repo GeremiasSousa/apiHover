@@ -7,7 +7,7 @@ date_default_timezone_set("America/Sao_Paulo"); //Definindo o fuso-hórario do P
 
 
 $uri = explode('/', $_GET['path']);
-
+$error = json_encode(['erro' => 404,'msg' => 'Not found']);
 
 if(isset($uri[0]) && $uri[0] != '') $context = $uri[0];
 else{ echo 'Not found'; exit;}
@@ -26,3 +26,4 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 include_once('./src/models/db.class.php');
 include_once('./src/controllers/getData.php');
+include_once('./src/controllers/postData.php');

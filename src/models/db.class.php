@@ -49,6 +49,24 @@ class DB
         } else return false;
     }
 
+    public static function moveImgUser($file)
+    {
+        define ('RAIZ', realpath(dirname(__FILE__)));
+        $pasta = '/files/';
+        $nome_file = uniqid();
+        $extensao = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        if ($extensao != 'png' && $extensao != 'jpeg' && $extensao != 'jpg') {
+           return 'isso não é uma imagem';
+        }
+
+        $point_end = move_uploaded_file($file['tmp_name'], RAIZ . $pasta . $nome_file . '.' . $extensao);
+        $point_url = $pasta . $nome_file . '.' . $extensao;
+        if ($point_end) {
+            return $point_url;
+        }else echo 'Não moveu';
+    }
+
     public static function verifyUser($email)
     {
         $conexao = db::connect();

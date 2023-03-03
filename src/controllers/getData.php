@@ -16,5 +16,7 @@ if ($method === 'GET') {
                 print_r(db::getDataUser($parametro));
             }
         }
+    }else{
+        print_r(db::getDataUser($parametro));
     }
 }
