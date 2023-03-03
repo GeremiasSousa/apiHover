@@ -24,6 +24,7 @@ else $where = '';
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-include_once('./src/models/db.class.php');
+include_once('./src/models/db.user.class.php');
+include_once('./src/models/db.publi.class.php');
 include_once('./src/controllers/getData.php');
 include_once('./src/controllers/postData.php');

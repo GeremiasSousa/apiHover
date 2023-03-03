@@ -16,7 +16,11 @@ if ($method === 'GET') {
                 print_r(db::getDataUser($parametro));
             }
         }
-    }else{
-        print_r(db::getDataUser($parametro));
+    }
+
+    if($context === 'posts'){
+        if ($acao === 'getAll') {
+            print_r(post::getDataPosts($parametro));
+        }
     }
 }

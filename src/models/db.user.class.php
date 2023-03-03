@@ -127,14 +127,5 @@ class DB
         }
     }
 
-    public static function getDataPosts()
-    {
-        $conexao = db::connect();
-        $usuarios_sql = $conexao->query("SELECT * FROM publicacoes");
-        $usuarios = array();
-        while ($key = mysqli_fetch_assoc($usuarios_sql)) {
-            $usuarios[] = $key;
-        }
-        return json_encode($usuarios, JSON_UNESCAPED_UNICODE);
-    }
+    
 }
