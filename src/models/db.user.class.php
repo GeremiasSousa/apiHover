@@ -52,7 +52,7 @@ class DB
     public static function moveImgUser($file)
     {
         define ('RAIZ', realpath(dirname(__FILE__)));
-        $pasta = '/files/';
+        $pasta = '/img-users/';
         $nome_file = uniqid();
         $extensao = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
