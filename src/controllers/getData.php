@@ -27,7 +27,7 @@ if ($method === 'GET') {
     if ($context === 'file') {
         if ($acao === 'get') {
             if ($parametro != '') {
-                
+                //Retornar as imagens 
             }
         }
     }
