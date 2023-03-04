@@ -25,8 +25,9 @@ if ($method === 'POST') {
         if ($acao === 'login') {
             if (isset($_POST['usuario'])) {
                 $usuario = json_decode($_POST['usuario'], JSON_UNESCAPED_UNICODE);
-                if(db::validateUser($usuario['email'], $usuario['senha'])){
-                    echo 'criar seções';
+                $verify = db::validateUser($usuario['email'], $usuario['senha']);
+                if($verify){
+                    echo $verify;
                 }else{
                     echo 'usuario não existe';
                 }

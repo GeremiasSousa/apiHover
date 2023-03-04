@@ -7,7 +7,7 @@ class DB
         return mysqli_connect('localhost', 'root', '', 'hoverline');
     }
 
-    public static function createUserUR($nome, $email, $senha, $insta, $face, $twitter, $img_user)
+    public static function createUserER($nome, $email, $senha, $insta, $face, $twitter, $img_user)
     {
         $senha = password_hash($senha, PASSWORD_DEFAULT);
         $conexao = db::connect();
@@ -51,7 +51,7 @@ class DB
 
     public static function moveImgUser($file)
     {
-        define ('RAIZ', realpath(dirname(__FILE__)));
+        define ('RAIZ', 'C:/xampp/htdocs/apiHover/public');
         $pasta = '/img-users/';
         $nome_file = uniqid();
         $extensao = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
@@ -61,7 +61,7 @@ class DB
         }
 
         $point_end = move_uploaded_file($file['tmp_name'], RAIZ . $pasta . $nome_file . '.' . $extensao);
-        $point_url = $pasta . $nome_file . '.' . $extensao;
+        $point_url = $nome_file . '.' . $extensao;
         if ($point_end) {
             return $point_url;
         }else echo 'Não moveu';
@@ -83,7 +83,7 @@ class DB
         if (mysqli_num_rows($res) > 0) {
             $usuario = mysqli_fetch_assoc($res);
             if (password_verify($senha, $usuario['senha_usuario'])) {
-                return true;
+                return $usuario['id_usuario'];
             }
         }
         return false;
@@ -125,6 +125,14 @@ class DB
             $usuarios['message'] = 'Not found';
             return json_encode($usuarios, JSON_UNESCAPED_UNICODE);
         }
+    }
+
+    public static function getFile($src){
+        $file = file_exists(realpath(dirname(__FILE__)).'/img-users/'.$src);
+        if($file){
+            return '/img-users/'.$src; 
+        }
+        else return post::error();
     }
 
     

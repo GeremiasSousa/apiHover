@@ -10,10 +10,12 @@ A API do blog HOVERLINE
 	1. [GET] /users/getAll -> Para mostrar todos os dados dos usuários;
 	2. [GET] /users/getAll/:tipo -> Para mostrar todos os dados dos usuários de tipo ER ou LR;
 	3. [GET] /users/getAll/:id -> Para mostrar todos os dados de um usuário específico;
-	4. [POST] /user/login -> Para ser feito a autenticação do usuário na plataforma;
-	5. [POST] /user/create/ -> Para criar um novo usuário na base de dados;
-	6. [PUT] /user/update/:id -> Para atualizar dados de um usuário no banco de dados;
-	7. [DELETE] /user/delete/:id -> Para apagar dados de um usuário no banco de dados;
+	4. [GET] /user/logoff/ -> Para encerrar a sessão do usuário no sistema;
+	5. [GET] /user/file/:src -> Para retornar a imagem do usuário no servidor;
+	6. [POST] /user/login -> Para ser feito a autenticação do usuário na plataforma;
+	7. [POST] /user/create/ -> Para criar um novo usuário na base de dados;
+	8. [PUT] /user/update/:id -> Para atualizar dados de um usuário no banco de dados;
+	9. [DELETE] /user/delete/:id -> Para apagar dados de um usuário no banco de dados;
 # As requisições feitas na api deverão ser contextualizadas nesse padrão para as publicações:
 	1. [GET] /posts/getAll/ -> Para mostrar todos os dados das puplicações;
 	2. [GET] /posts/getAll/:id -> Para mostrar todos os dados de uma publicação específica;

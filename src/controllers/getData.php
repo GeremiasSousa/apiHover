@@ -12,15 +12,23 @@ if ($method === 'GET') {
             } else if ($parametro === 'lr') {
                 print_r(db::getDataUsers('LR'));
                 exit;
-            } else{
+            } else {
                 print_r(db::getDataUser($parametro));
             }
         }
     }
 
-    if($context === 'posts'){
+    if ($context === 'posts') {
         if ($acao === 'getAll') {
             print_r(post::getDataPosts($parametro));
+        }
+    }
+
+    if ($context === 'file') {
+        if ($acao === 'get') {
+            if ($parametro != '') {
+                
+            }
         }
     }
 }

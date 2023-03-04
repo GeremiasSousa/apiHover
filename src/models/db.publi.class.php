@@ -25,7 +25,7 @@ class POST{
 
 
     public static function moveImgPubli($file){
-        define ('RAIZ', realpath(dirname(__FILE__)));
+        define ('RAIZ', 'C:/xampp/htdocs/apiHover/public');
         $pasta = '/img-publi/';
         $nome_file = uniqid();
         $extensao = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
