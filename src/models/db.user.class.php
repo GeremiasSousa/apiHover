@@ -128,11 +128,12 @@ class DB
     }
 
     public static function getFile($src){
-        $file = file_exists(realpath(dirname(__FILE__)).'/img-users/'.$src);
-        if($file){
+        if(file_exists('C:/xampp/htdocs/apiHover/public'.'/img-users/'.$src)){
             return '/img-users/'.$src; 
-        }
-        else return post::error();
+        }else if(file_exists('C:/xampp/htdocs/apiHover/public'.'/img-publi/'.$src)){
+            return '/img-publi/'.$src;
+        }else return false;
+        
     }
 
     

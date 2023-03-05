@@ -1,6 +1,8 @@
 <?php
 
 if ($method === 'POST') {
+
+    //Rota de criação de usuário LR
     if ($context === 'user') {
         if ($acao === 'create') {
             if (isset($_POST['usuario'])) {
@@ -22,6 +24,7 @@ if ($method === 'POST') {
             }
         }
 
+        //Rota de autenticação de usuário
         if ($acao === 'login') {
             if (isset($_POST['usuario'])) {
                 $usuario = json_decode($_POST['usuario'], JSON_UNESCAPED_UNICODE);
@@ -29,12 +32,13 @@ if ($method === 'POST') {
                 if($verify){
                     echo $verify;
                 }else{
-                    echo 'usuario não existe';
+                    print_r($error);
                 }
             }
         }
     }
 
+    //Rota de criar publicações
     if ($context === 'post') {
         if ($acao === 'create') {
             if (isset($_POST['publicacao'])) {
