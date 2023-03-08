@@ -136,5 +136,10 @@ class DB
         
     }
 
-    
+    public static function updateDataUser($id, $dados){
+        $conexao = db::connect();
+        $dados_user = json_decode($dados, true);
+        return $dados_user;
+    }
+
 }

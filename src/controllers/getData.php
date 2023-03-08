@@ -54,5 +54,14 @@ if ($method === 'GET') {
         }
     }
 
-
+    if($context === 'user'){
+        if ($acao === 'logoff') {
+            if (isset($_SESSION['usuario'])) {
+                unset($_SESSION['usuario']);
+                print_r('true');
+            }else{
+                print_r('false');
+            }
+        }
+    }
 }

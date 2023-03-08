@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: *'); //Método que faz com que a API possa ser acessada por qualquer host
 header('Content-type: application/json'); // Método que dita que qualquer enviado/recebido tem de ser JSON
 header('Content-Type: text/html; charset=utf-8');
-
+session_start();
 date_default_timezone_set("America/Sao_Paulo"); //Definindo o fuso-hórario do PHP
 $error = json_encode(['erro' => 404, 'msg' => 'Not found']);
 
@@ -32,6 +32,7 @@ if (isset($_GET['path'])) {
     include_once('./src/models/db.publi.class.php');
     include_once('./src/controllers/getData.php');
     include_once('./src/controllers/postData.php');
+    include_once('./src/controllers/putData.php');
 }else{
     print_r($error);
 }

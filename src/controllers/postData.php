@@ -30,7 +30,9 @@ if ($method === 'POST') {
                 $usuario = json_decode($_POST['usuario'], JSON_UNESCAPED_UNICODE);
                 $verify = db::validateUser($usuario['email'], $usuario['senha']);
                 if($verify){
-                    echo $verify;
+                    $_SESSION['usuario'] = json_decode( db::getDataUser($verify), true);// O valor retornardo na matriz é 
+                    // $_SESSION['usuario'][0] ou seja, os valores dos usuários estarão no primeior índice do array
+                    return 'true';
                 }else{
                     print_r($error);
                 }
