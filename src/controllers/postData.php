@@ -32,10 +32,12 @@ if ($method === 'POST') {
                 if($verify){
                     $_SESSION['usuario'] = json_decode( db::getDataUser($verify), true);// O valor retornardo na matriz é 
                     // $_SESSION['usuario'][0] ou seja, os valores dos usuários estarão no primeior índice do array
-                    return 'true';
+                    print_r('true');
                 }else{
                     print_r($error);
                 }
+            }else{
+                print_r($error);
             }
         }
     }

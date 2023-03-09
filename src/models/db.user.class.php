@@ -84,7 +84,7 @@ class DB
             $usuario = mysqli_fetch_assoc($res);
             if (password_verify($senha, $usuario['senha_usuario'])) {
                 return $usuario['id_usuario'];
-            }
+            }else return false;
         }
         return false;
     }
