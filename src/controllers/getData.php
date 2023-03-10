@@ -58,9 +58,9 @@ if ($method === 'GET') {
         if ($acao === 'logoff') {
             if (isset($_SESSION['usuario'])) {
                 unset($_SESSION['usuario']);
-                print_r('true');
+                echo "<script>location.href = 'http://localhost/hoverline/'</script>";
             }else{
-                print_r('false');
+                echo "<script>location.href = 'http://localhost/hoverline/'</script>";
             }
         }
     }
