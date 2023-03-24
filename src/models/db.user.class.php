@@ -1,7 +1,15 @@
 <?php
+/**
+ * Summary of DB
+ * * @return bool|mysqli|int|string
+ */
 class DB
 {
     //STATIC SERVE PARA CHAMAR O METODO JA JUNTO COM A CLASSE EX: db::connect()
+    /**
+     * Summary of connect
+     * @return bool|mysqli
+     */
     public static function connect()
     {
         return mysqli_connect('localhost', 'root', '', 'hoverline');
@@ -45,26 +53,26 @@ class DB
         )";
 
         if (!db::verifyUser($email)) {
-            if ($conexao->query($sql)) return true;
+            if ($conexao->query($sql)) return mysqli_insert_id($conexao);
         } else return false;
     }
 
     public static function moveImgUser($file)
     {
-        define ('RAIZ', 'C:/xampp/htdocs/apiHover/public');
+        define('RAIZ', 'C:/xampp/htdocs/apiHover/public');
         $pasta = '/img-users/';
         $nome_file = uniqid();
         $extensao = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
         if ($extensao != 'png' && $extensao != 'jpeg' && $extensao != 'jpg') {
-           return 'isso não é uma imagem';
+            return false;
         }
 
         $point_end = move_uploaded_file($file['tmp_name'], RAIZ . $pasta . $nome_file . '.' . $extensao);
         $point_url = $nome_file . '.' . $extensao;
         if ($point_end) {
             return $point_url;
-        }else echo 'Não moveu';
+        } else return false;
     }
 
     public static function verifyUser($email)
@@ -84,7 +92,7 @@ class DB
             $usuario = mysqli_fetch_assoc($res);
             if (password_verify($senha, $usuario['senha_usuario'])) {
                 return $usuario['id_usuario'];
-            }else return false;
+            } else return false;
         }
         return false;
     }
@@ -110,10 +118,10 @@ class DB
         }
     }
 
-    public static function getDataUser($id)
+    public static function getDataUser($id = '', $email = '')
     {
         $conexao = db::connect();
-        $usuarios_sql = $conexao->query("SELECT * FROM usuarios  WHERE id_usuario = '$id'");
+        $usuarios_sql = $conexao->query("SELECT * FROM usuarios  WHERE id_usuario = '$id' OR email_usuario = '$email' ");
         $usuarios = array();
         if (mysqli_num_rows($usuarios_sql) > 0) {
             while ($key = mysqli_fetch_assoc($usuarios_sql)) {
@@ -127,19 +135,42 @@ class DB
         }
     }
 
-    public static function getFile($src){
-        if(file_exists('C:/xampp/htdocs/apiHover/public'.'/img-users/'.$src)){
-            return '/img-users/'.$src; 
-        }else if(file_exists('C:/xampp/htdocs/apiHover/public'.'/img-publi/'.$src)){
-            return '/img-publi/'.$src;
-        }else return false;
-        
+    public static function getFile($src)
+    {
+        if (file_exists('C:/xampp/htdocs/apiHover/public' . '/img-users/' . $src)) {
+            return '/img-users/' . $src;
+        } else if (file_exists('C:/xampp/htdocs/apiHover/public' . '/img-publi/' . $src)) {
+            return '/img-publi/' . $src;
+        } else return false;
     }
 
-    public static function updateDataUser($id, $dados){
+
+    public static function updateToUr($id, $tipo_usuario, $insta, $face, $twitter)
+    {
+        $conexao = db::connect();
+        $sql = "UPDATE usuarios SET tipo_usuario = '$tipo_usuario', instagram_usuario = '$insta', facebook_usuario = '$face', twiter_usuario = '$twitter'  WHERE id_usuario = '$id' ";
+        if ($conexao->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public static function updateDataUserImg($id, $img_src)
+    {
+        $conexao = db::connect();
+        $sql = "UPDATE usuarios SET img_usuario = '$img_src' WHERE id_usuario = '$id' ";
+        if ($conexao->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function updateDataUser($id, $dados)
+    {
         $conexao = db::connect();
         $dados_user = json_decode($dados, true);
         return $dados_user;
     }
-
 }

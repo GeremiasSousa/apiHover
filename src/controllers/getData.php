@@ -13,7 +13,7 @@ if ($method === 'GET') {
                 print_r(db::getDataUsers('LR'));
                 exit;
             } else {
-                print_r(db::getDataUser($parametro));
+                print_r(db::getDataUser($parametro, $parametro));
             }
         }
     }
@@ -44,22 +44,32 @@ if ($method === 'GET') {
                         imagesavealpha($img, true);
                         imagecolortransparent($img);
                         imagepng($img, null, 8);
-                    }else if(!$file){
-                        print_r($error);
+                    } else if (!$file) {
+                        header('Content-Type: image/png');
+                        $img = imagecreatefrompng("http://localhost/apiHover/public/user.png");
+                        imagealphablending($img, false);
+                        imagesavealpha($img, true);
+                        imagecolortransparent($img);
+                        imagepng($img, null, 8);
                     }
                 } else {
-                    print_r($error);
+                    header('Content-Type: image/png');
+                    $img = imagecreatefrompng("http://localhost/apiHover/public/user.png");
+                    imagealphablending($img, false);
+                    imagesavealpha($img, true);
+                    imagecolortransparent($img);
+                    imagepng($img, null, 8);
                 }
             }
         }
     }
 
-    if($context === 'user'){
+    if ($context === 'user') {
         if ($acao === 'logoff') {
             if (isset($_SESSION['usuario'])) {
                 unset($_SESSION['usuario']);
                 echo "<script>location.href = 'http://localhost/hoverline/'</script>";
-            }else{
+            } else {
                 echo "<script>location.href = 'http://localhost/hoverline/'</script>";
             }
         }
