@@ -63,7 +63,8 @@ if ($method === 'GET') {
             }
         }
     }
-
+    
+    // Rota de exclusão de sessão
     if ($context === 'user') {
         if ($acao === 'logoff') {
             if (isset($_SESSION['usuario'])) {

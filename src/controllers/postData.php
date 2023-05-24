@@ -33,7 +33,7 @@ if ($method === 'POST') {
         //Rota de inserção de foto do usuário
         if ($acao === 'update') {
             if ($parametro === 'file' and isset($where)) {
-                $img_src = db::moveImgUser($_FILES['file']);
+                $img_src = db::moveImgUser($_FILES['file-ur']);
                 if ($img_src != false and db::updateDataUserImg($where, $img_src)) print_r('true');
                 else print_r('false');
             }
