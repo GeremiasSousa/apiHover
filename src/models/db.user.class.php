@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Summary of DB
  * * @return bool|mysqli|int|string
@@ -155,10 +156,11 @@ class DB
             return false;
         }
     }
-    
+
     public static function updateDataUserImg($id, $img_src)
     {
         $conexao = db::connect();
+
         $sql = "UPDATE usuarios SET img_usuario = '$img_src' WHERE id_usuario = '$id' ";
         if ($conexao->query($sql)) {
             return true;
@@ -170,7 +172,23 @@ class DB
     public static function updateDataUser($id, $dados)
     {
         $conexao = db::connect();
-        $dados_user = json_decode($dados, true);
-        return $dados_user;
+        $nome = $dados['nome'];
+        $email = $dados['email'];
+        $twitter = $dados['twitter'];
+        $insta = $dados['insta'];
+        $face = $dados['face'];
+
+        $sql = "UPDATE usuarios SET nome_usuario = '$nome',
+            email_usuario = '$email',
+            twiter_usuario = '$twitter',
+            instagram_usuario = '$insta',
+            facebook_usuario = '$face' 
+        WHERE id_usuario = '$id' ";
+
+        if ($conexao->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

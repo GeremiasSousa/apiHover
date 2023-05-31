@@ -9,7 +9,6 @@ $error = json_encode(['erro' => 404, 'msg' => 'Not found']);
 if (isset($_GET['path'])) {
     $uri = explode('/', $_GET['path']);
     
-
     if (isset($uri[0]) && $uri[0] != '') $context = $uri[0];
     else {
         echo 'Not found';
@@ -32,7 +31,6 @@ if (isset($_GET['path'])) {
     include_once('./src/models/db.publi.class.php');
     include_once('./src/controllers/getData.php');
     include_once('./src/controllers/postData.php');
-    include_once('./src/controllers/putData.php');
 }else{
     print_r($error);
 }

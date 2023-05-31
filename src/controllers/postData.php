@@ -20,6 +20,19 @@ if ($method === 'POST') {
             }
         }
 
+        // Rota de update dos dados do usuario
+        if ($acao === 'updatee') {
+            if (isset($_POST['usuario'])) {
+                $usuario = json_decode($_POST['usuario'], JSON_UNESCAPED_UNICODE);
+                $usuario_id = $usuario['id'];
+                if (db::updateDataUser($usuario_id, $usuario)) {
+                    print_r('true');
+                } else {
+                    print_r('false');
+                }
+            }
+        }
+
         //Rota de modificação do usuário LR para UR
         if ($acao === 'update') {
             if ($parametro === 'ur' and isset($_POST['usuario']) and $where === 'social') {
@@ -32,10 +45,14 @@ if ($method === 'POST') {
 
         //Rota de inserção de foto do usuário
         if ($acao === 'update') {
-            if ($parametro === 'file' and isset($where)) {
+            if ($parametro === 'file') {
+                $id = $_POST['id-usuario'];
                 $img_src = db::moveImgUser($_FILES['file-ur']);
-                if ($img_src != false and db::updateDataUserImg($where, $img_src)) print_r('true');
-                else print_r('false');
+                if (db::updateDataUserImg($id, $img_src)) {
+                    print_r('true');
+                }
+            } else {
+                print_r('false');
             }
         }
 
@@ -62,23 +79,18 @@ if ($method === 'POST') {
         if ($acao === 'create') {
             if (isset($_POST['publicacao'])) {
                 $publicaco = json_decode($_POST['publicacao'], JSON_UNESCAPED_UNICODE);
-                $publicaco['img'] = $_FILES['img'];
-                $moveImg = post::moveImgPubli($publicaco['img']);
-                if ($moveImg) {
-                    if (post::createPost(
-                        $publicaco['titulo'],
-                        $publicaco['conteudo'],
-                        $publicaco['previa'],
-                        $publicaco['tag'],
-                        $moveImg,
-                        $publicaco['autor'],
-                        $publicaco['id']
-                    )) {
-                        print_r('true');
-                    } else {
-                        unlink('C:/xampp/htdocs/apiHover/src/models' . $moveImg);
-                        echo 'false';
-                    }
+                if (post::createPost(
+                    $publicaco['titulo'],
+                    $publicaco['conteudo'],
+                    $publicaco['previa'],
+                    $publicaco['tag'],
+                    $publicaco['autor'],
+                    $publicaco['id']
+                )) {
+                    print_r('true');
+                } else {
+                    unlink('C:/xampp/htdocs/apiHover/src/models' . $moveImg);
+                    echo 'false';
                 }
             }
         }
