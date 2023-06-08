@@ -46,8 +46,8 @@ if ($method === 'POST') {
         //Rota de inserção de foto do usuário
         if ($acao === 'update') {
             if ($parametro === 'file') {
-                $id = $_POST['id-usuario'];
-                $img_src = db::moveImgUser($_FILES['file-ur']);
+                $id = $where;
+                $img_src = db::moveImgUser($_FILES['file']);
                 if (db::updateDataUserImg($id, $img_src)) {
                     print_r('true');
                 }
@@ -55,6 +55,7 @@ if ($method === 'POST') {
                 print_r('false');
             }
         }
+
 
         //Rota de autenticação de usuário
         if ($acao === 'login') {
@@ -76,22 +77,38 @@ if ($method === 'POST') {
 
     //Rota de criar publicações
     if ($context === 'post') {
+
         if ($acao === 'create') {
             if (isset($_POST['publicacao'])) {
                 $publicaco = json_decode($_POST['publicacao'], JSON_UNESCAPED_UNICODE);
-                if (post::createPost(
+                $postar = post::createPost(
                     $publicaco['titulo'],
                     $publicaco['conteudo'],
                     $publicaco['previa'],
                     $publicaco['tag'],
-                    $publicaco['autor'],
                     $publicaco['id']
-                )) {
-                    print_r('true');
+                );
+                if ($postar != false) {
+                    print_r($postar);
                 } else {
-                    unlink('C:/xampp/htdocs/apiHover/src/models' . $moveImg);
                     echo 'false';
                 }
+            }
+        }
+
+        //Rota de inserção de foto da publicação
+        if ($acao === 'update') {
+            if ($parametro === 'file') {
+                $id = $where;
+                $img_src = post::moveImgPubli($_FILES['file']);
+                $up_img = post::updateImgPubli($id, $img_src);
+                if ($up_img != false) {
+                    print_r('true');
+                } else {
+                    print_r('false');
+                }
+            } else {
+                print_r('false');
             }
         }
     }
