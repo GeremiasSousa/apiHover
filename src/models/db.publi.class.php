@@ -11,7 +11,7 @@ class POST
     {
         $conexao = db::connect();
         $data = date('d/m/y');
-        $sql = "INSERT INTO publicacoes (titulo_publicacao, conteudo_publicacao, previa_publicacao, tag_publicacao, data_publicacao, nome_usuario, id_usuario)
+        $sql = "INSERT INTO publicacoes (titulo_publicacao, conteudo_publicacao, previa_publicacao, tag_publicacao, data_publicacao, id_usuario)
         VALUES (
             '$titulo',
             '$conteudo',

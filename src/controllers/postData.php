@@ -34,7 +34,7 @@ if ($method === 'POST') {
         }
 
         //Rota de modificação do usuário LR para UR
-        if ($acao === 'update') {
+        if ($acao === 'updateUser') {
             if ($parametro === 'ur' and isset($_POST['usuario']) and $where === 'social') {
                 $usuario = json_decode($_POST['usuario'], JSON_UNESCAPED_UNICODE);
                 if (db::updateToUr($usuario['id'], $usuario['tipo'], $usuario['instagram'], $usuario['facebook'], $usuario['twitter'])) {
